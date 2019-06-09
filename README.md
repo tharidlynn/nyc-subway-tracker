@@ -15,28 +15,33 @@ _Note: the project was bootstraped with `sbt new scala/scala-seed.g8`_
 ## Getting Started
 
 1.Start Zookeeper and Kafka server with command
+```
+$ bin/zookeeper-server-start.sh config/zookeeper.properties
 
-`bin/zookeeper-server-start.sh config/zookeeper.properties`
-
-`bin/kafka-server-start.sh config/server.properties`
+$ bin/kafka-server-start.sh config/server.properties
+```
 
 2.Create a topic 
 
-`bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic test`
-
+```
+bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic test
+```
 3.Verify that topic 
 
-`bin/kafka-topics.sh --list --bootstrap-server localhost:9092`
+```
+bin/kafka-topics.sh --list --bootstrap-server localhost:9092
+```
 
 4.Build fat Jar File with `sbt assembly`
 
 [Optional] `sbt run`  is sufficient in the local development.
 
 5.Start the Producer and Consumer:
+```
+$ java -cp target/nyc-protobuf-assembly-0.1.0-SNAPSHOT.jar example.MTAProducer
 
-`java -cp target/nyc-protobuf-assembly-0.1.0-SNAPSHOT.jar example.MTAProducer`
-
-`java -cp target/nyc-protobuf-assembly-0.1.0-SNAPSHOT.jar example.MTAConsumer`
+$ java -cp target/nyc-protobuf-assembly-0.1.0-SNAPSHOT.jar example.MTAConsumer
+```
 
 The output should look like this:
 
@@ -55,18 +60,26 @@ Next N bound 6 train will arrive at station 33 St in 14 minutes
 
 Describe current offsets and end offsets
 
-`bin/kafka-consumer-groups.sh --bootstrap-server localhost:9092 --group turn-over --describe`
+```
+$ bin/kafka-consumer-groups.sh --bootstrap-server localhost:9092 --group turn-over --describe
+```
 
 Reset current offsets to the earliest offset
 
-`bin/kafka-consumer-groups.sh --bootstrap-server localhost:9092 --group turn-over --topic test --reset-offsets --to-earliest --execute`
+```
+$ bin/kafka-consumer-groups.sh --bootstrap-server localhost:9092 --group turn-over --topic test --reset-offsets --to-earliest --execute
+```
 
 Append delete.topic.enable=true to config/server.properties before executing delete command:
 
-`bin/kafka-topics.sh --zookeeper localhost:2181 --delete --topic test`
+```
+$ bin/kafka-topics.sh --zookeeper localhost:2181 --delete --topic test
+```
 
 Terminate Zookeeper and Kafka:
 
-`ps -ef | grep kafka | grep -v grep | awk '{print $2}'| xargs kill -9`
+```
+$ ps -ef | grep kafka | grep -v grep | awk '{print $2}'| xargs kill -9
 
-`ps -ef | grep zookeeper | grep -v grep | awk '{print $2}'| xargs kill -9`
+$ ps -ef | grep zookeeper | grep -v grep | awk '{print $2}'| xargs kill -9
+```
