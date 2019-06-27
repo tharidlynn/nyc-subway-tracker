@@ -1,5 +1,5 @@
 # NYC-Subway Tracker
-This project was an attempt to rewrite [Building a real time NYC subway tracker with Apache Kafka](https://hackernoon.com/building-a-real-time-nyc-subway-tracker-with-apache-kafka-40d4e09bfe98) in Scala used for educational purposes only.
+This project is heavily inspired by [Building a real time NYC subway tracker with Apache Kafka](https://hackernoon.com/building-a-real-time-nyc-subway-tracker-with-apache-kafka-40d4e09bfe98).
 
 The MTA NYC-Subway uses [GTFS Realtime](https://developers.google.com/transit/gtfs-realtime/), based on [Protocol Buffers](https://developers.google.com/protocol-buffers/), to track and update the states of the subway train. Thus, we need to generate the Scala class from gtfs-realtime.proto and nyct-subway.proto in order to parsing and serializing the MTA responses.
 
@@ -32,7 +32,7 @@ $ bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-f
 $ bin/kafka-topics.sh --list --bootstrap-server localhost:9092
 ```
 
-4.Build fat Jar File with `sbt assembly`
+4.Build a fat Jar with `sbt assembly`
 
 [Optional] `sbt run`  is sufficient in the local development.
 
